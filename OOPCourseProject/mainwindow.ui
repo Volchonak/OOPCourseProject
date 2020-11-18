@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>364</height>
+   </rect>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>300</width>
+    <height>400</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>0</y>
+      <width>261</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="LabelWelcomText">
+       <property name="text">
+        <string>Абонемент у басейн</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="LabelOpenFile">
+         <property name="text">
+          <string>Введіть назву файлу</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="LineEditFileName"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="PushButtonOpenFile">
+           <property name="text">
+            <string>Відкрити файл</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="PushButtonContinueWithoutFile">
+           <property name="text">
+            <string>Продовжити без файла</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>300</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="action_newFile"/>
+    <addaction name="action_openFile"/>
+    <addaction name="action_saveFile"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Пошук</string>
+    </property>
+    <addaction name="action_findByName"/>
+    <addaction name="action_findByLengthOfStay"/>
+    <addaction name="action_findByNumOfVisits"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_newFile">
+   <property name="text">
+    <string>Новий файл</string>
+   </property>
+  </action>
+  <action name="action_openFile">
+   <property name="text">
+    <string>Відкрити файл</string>
+   </property>
+  </action>
+  <action name="action_saveFile">
+   <property name="text">
+    <string>Зберегти файл</string>
+   </property>
+  </action>
+  <action name="action_findByName">
+   <property name="text">
+    <string>Пошук за ПІП</string>
+   </property>
+  </action>
+  <action name="action_findByLengthOfStay">
+   <property name="text">
+    <string>Пошук за тривалістю перебування</string>
+   </property>
+  </action>
+  <action name="action_findByNumOfVisits">
+   <property name="text">
+    <string>Пошук за вказаною кількістю відвідувань</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

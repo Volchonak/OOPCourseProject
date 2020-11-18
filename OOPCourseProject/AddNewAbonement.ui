@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AddNewAbonement</class>
+ <widget class="AddNewAbonement" name="AddNewAbonement">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>430</width>
+    <height>434</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Додавання студента</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog
+{
+	background:white;
+}</string>
+  </property>
+  <widget class="QPushButton" name="PushButtonAddAbonement">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>370</y>
+     <width>151</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+   </property>
+   <property name="text">
+    <string>Зберегти</string>
+   </property>
+  </widget>
+  <widget class="QWidget" name="layoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>352</width>
+     <height>321</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QLineEdit" name="LineEditLastName">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="LineEditFirstName">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="LineEditFathersName">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="LineEditDurationPerDay">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="LineEditVisitsPerMonth">
+        <property name="styleSheet">
+         <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLineEdit" name="LineEditEndDay">
+        <property name="maximumSize">
+         <size>
+          <width>112</width>
+          <height>38</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="LineEditEndMonth">
+        <property name="maximumSize">
+         <size>
+          <width>112</width>
+          <height>38</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="LineEditEndYear">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>112</width>
+          <height>38</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="RadioButtonIsFamily">
+        <property name="text">
+         <string>Сімейний</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="CheckBoxSauna">
+        <property name="text">
+         <string>Сауна</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QCheckBox" name="CheckBoxWaterPark">
+        <property name="text">
+         <string>Аквапарк</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="CheckBoxMassage">
+        <property name="text">
+         <string>Масаж</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="CheckBoxGym">
+        <property name="text">
+         <string>Тренажерний зал</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QCheckBox" name="CheckBoxSteamRoom">
+        <property name="text">
+         <string>Парна</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AddNewAbonement</class>
+   <extends>QWidget</extends>
+   <header>addnewabonement.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -8,12 +8,14 @@ using std::exception;
 class DataException: public exception
 {
 public:
-    DataException(const std::string& message);
-    DataException(const char* message);
+    DataException(const std::string& message) noexcept;
+    DataException(const char* message) noexcept;
     DataException(const DataException& ) = default;
     ~DataException() = default;
-    const char* what() const override;
+    virtual const char* what() const noexcept override;
 
+private:
+    std::string m_message;
 };
 
 #endif // DATAEXCEPTION_H

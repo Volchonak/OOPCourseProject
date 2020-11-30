@@ -1,15 +1,15 @@
 #include "DataException.h"
 
 
-DataException::DataException(const std::string& message) : exception(message.c_str())
+DataException::DataException(const std::string& message) noexcept
 {
-
+    m_message = message;
 }
-DataException::DataException(const char* message) : exception(message)
+DataException::DataException(const char* message) noexcept
 {
-
+    m_message = message;
 }
-const char* DataException::what() const
+const char* DataException::what() const noexcept
 {
-    return exception::what();
+    return m_message.c_str();
 }

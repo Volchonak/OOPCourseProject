@@ -7,12 +7,12 @@
 class Person
 {
 public:
-    Person() = default;
+    Person();
     Person(const std::string& first_name
            ,const std::string& last_name
            ,const std::string& fathers_name);
-    Person(const Person& ) = default;
-    Person(Person&& ) = default;
+    Person(const Person& copy);
+    Person(Person&& copy);
     Person& operator= (const Person&) = default;
     std::string get_first_name() const noexcept;
     std::string get_last_name() const noexcept;

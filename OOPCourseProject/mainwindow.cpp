@@ -25,14 +25,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_PushButtonOpenFile_clicked()
 {
-    OperatingWindow *window = new OperatingWindow;
+    OperatingWindow *window = new OperatingWindow(true);
     window->show();
     close();
 }
 
 void MainWindow::on_PushButtonContinueWithoutFile_clicked()
 {
-    OperatingWindow *window = new OperatingWindow;
+    OperatingWindow *window = new OperatingWindow(false);
     window->show();
     close();
 }
+

@@ -3,7 +3,7 @@
 
 SwimmingPoolSeasonTicket::SwimmingPoolSeasonTicket()
 {
-
+    m_empty = true;
 }
 SwimmingPoolSeasonTicket::SwimmingPoolSeasonTicket(const Person& person
                          ,const Date& end_date
@@ -18,6 +18,7 @@ SwimmingPoolSeasonTicket::SwimmingPoolSeasonTicket(const Person& person
     m_visits_per_month = visits_per_month;
     m_is_family = is_family;
     m_additional_services = additional_services;
+    m_empty = false;
 }
 SwimmingPoolSeasonTicket::SwimmingPoolSeasonTicket(const SwimmingPoolSeasonTicket& copy)
 {
@@ -27,24 +28,39 @@ SwimmingPoolSeasonTicket::SwimmingPoolSeasonTicket(const SwimmingPoolSeasonTicke
     m_visits_per_month = copy.m_visits_per_month;
     m_is_family = copy.m_is_family;
     m_additional_services = copy.m_additional_services;
+    m_empty = copy.m_empty;
 }
-SwimmingPoolSeasonTicket SwimmingPoolSeasonTicket::operator>>(std::ifstream& file_input)
+SwimmingPoolSeasonTicket::SwimmingPoolSeasonTicket(SwimmingPoolSeasonTicket&& copy)
 {
-    if(!file_input.is_open())
-    {
-        //throw exception
-    }
-    //SwimmingPoolSeasonTicket a;
-    //*this = a; redo for smth like this
+    m_person = std::move(copy.m_person);
+    m_end_date = std::move(copy.m_end_date);
+    m_duration_per_day = copy.m_duration_per_day;
+    m_visits_per_month = copy.m_visits_per_month;
+    m_is_family = copy.m_is_family;
+    m_additional_services = std::move(copy.m_additional_services);
+    m_empty = copy.m_empty;
+}
+
+SwimmingPoolSeasonTicket& SwimmingPoolSeasonTicket::operator=(const SwimmingPoolSeasonTicket& copy) noexcept
+{
+    m_person = copy.m_person;
+    m_end_date = copy.m_end_date;
+    m_duration_per_day = copy.m_duration_per_day;
+    m_visits_per_month = copy.m_visits_per_month;
+    m_is_family = copy.m_is_family;
+    m_additional_services = copy.m_additional_services;
+    m_empty = copy.m_empty;
     return *this;
 }
-SwimmingPoolSeasonTicket SwimmingPoolSeasonTicket::operator<<(std::ofstream& file_output)
+SwimmingPoolSeasonTicket& SwimmingPoolSeasonTicket::operator=(SwimmingPoolSeasonTicket&& copy) noexcept
 {
-    if(!file_output.is_open())
-    {
-        //throw
-    }
-    file_output << DataToStr();
+    m_person = std::move(copy.m_person);
+    m_end_date = std::move(copy.m_end_date);
+    m_duration_per_day = copy.m_duration_per_day;
+    m_visits_per_month = copy.m_visits_per_month;
+    m_is_family = copy.m_is_family;
+    m_additional_services = std::move(copy.m_additional_services);
+    m_empty = copy.m_empty;
     return *this;
 }
 Person SwimmingPoolSeasonTicket::get_person() const noexcept
@@ -126,16 +142,23 @@ void SwimmingPoolSeasonTicket::AddAdditionalService(const AdditionalServices add
 std::string SwimmingPoolSeasonTicket::DataToStr() const noexcept
 {
     std::string data("");
+    std::ostringstream duration_per_day;
+    duration_per_day << m_duration_per_day;
     data += m_person.get_last_name()
-            + m_person.get_first_name()
-            + m_person.get_fathers_name();
-    data += " " + std::to_string(m_end_date.m_day)
-          + "." + std::to_string(m_end_date.m_month)
-          + "." + std::to_string(m_end_date.m_year);
-    data += " " + std::to_string(m_duration_per_day);
-    data += " " + std::to_string(m_visits_per_month);
-    data += " " + std::to_string(m_is_family);
-    data += " " + AdditionalServicesToStr();
+            + "," + m_person.get_first_name()
+            + "," + m_person.get_fathers_name();
+    data += "," + std::to_string(m_end_date.m_day)
+          + "," + std::to_string(m_end_date.m_month)
+          + "," + std::to_string(m_end_date.m_year);
+    data += "," + duration_per_day.str();
+    data += "," + std::to_string(m_visits_per_month);
+    data += ",";
+    if(m_is_family)
+        data += "1";
+    else
+        data += "0";
+    data +=  AdditionalServicesToStr();
+    data += "\n";
 
     return data;
 }
@@ -146,15 +169,14 @@ std::string SwimmingPoolSeasonTicket::AdditionalServicesToStr () const noexcept
     {
         switch(i)
         {
-        case AdditionalServices::sauna: data += " сауна"; break;
-        case AdditionalServices::water_park: data += " аквапарк"; break;
-        case AdditionalServices::massage: data += " масаж"; break;
-        case AdditionalServices::gym: data += " спортзал"; break;
-        case AdditionalServices::steam_room: data += " парна"; break;
+        case AdditionalServices::sauna: data += ",сауна"; break;
+        case AdditionalServices::water_park: data += ",аквапарк"; break;
+        case AdditionalServices::massage: data += ",масаж"; break;
+        case AdditionalServices::gym: data += ",спортзал"; break;
+        case AdditionalServices::steam_room: data += ",парна"; break;
         }
 
     }
-    data.erase(data.begin());
     return data;
 }
 void SwimmingPoolSeasonTicket::AddAdditionalService(const std::string& additional_service)
@@ -177,3 +199,78 @@ void SwimmingPoolSeasonTicket::AddAdditionalService(const std::string& additiona
         throw std::exception();
     //change exception
 }
+bool SwimmingPoolSeasonTicket::Empty() const noexcept
+{
+    return m_empty;
+}
+void SwimmingPoolSeasonTicket::set_day(const int day)
+{
+    m_end_date.set_day(day);
+}
+void SwimmingPoolSeasonTicket::set_month(const int month)
+{
+    m_end_date.set_month(month);
+}
+void SwimmingPoolSeasonTicket::set_year( const int year)
+{
+    m_end_date.set_year(year);
+}
+std::ifstream& operator>>(std::ifstream& file_input, SwimmingPoolSeasonTicket& season_ticket)
+{
+    if(!file_input.is_open())
+    {
+        throw std::runtime_error("File is not opened\n");
+    }
+    std::string line;
+    std::string data;
+    std::getline(file_input, line);
+    std::stringstream tokens(line);
+    int data_index = 0;
+    while(std::getline(tokens, data, ','))
+    {
+        switch(data_index)
+        {
+        case 0: season_ticket.set_last_name(data); break;
+        case 1: season_ticket.set_first_name(data); break;
+        case 2: season_ticket.set_fathers_name(data); break;
+        case 3: season_ticket.set_day(std::stoi(data)); break;
+        case 4: season_ticket.set_month(std::stoi(data)); break;
+        case 5: season_ticket.set_year(std::stoi(data)); break;
+        case 6:
+        {
+            std::istringstream string_to_double(data);
+            double duration_per_day;
+            string_to_double >> duration_per_day;
+            season_ticket.set_duration_per_day(duration_per_day); break;
+        }
+        case 7: season_ticket.set_visits_per_month(static_cast<std::size_t>(std::stoi(data))); break;
+        case 8: season_ticket.set_family_type(std::stoi(data)); break;
+        default: season_ticket.AddAdditionalService(data);
+        }
+        ++data_index;
+    }
+    if(data_index < 8)
+        throw std::runtime_error("Invalid data\n");
+    return file_input;
+}
+std::ofstream& operator<<(std::ofstream& file_output, SwimmingPoolSeasonTicket& season_ticket)
+{
+    if(!file_output.is_open())
+    {
+        throw std::runtime_error("File is not opened\n");
+    }
+    file_output << season_ticket.DataToStr();
+    return file_output;
+}
+
+
+
+
+
+
+
+
+
+
+
+

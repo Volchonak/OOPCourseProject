@@ -13,9 +13,8 @@ AddNewAbonement::AddNewAbonement(SwimmingPoolSeasonTicket& season_ticket, QWidge
     auto day_validator = new QIntValidator(1,31);
     auto month_validator = new QIntValidator(1,12);
     auto year_validator = new QIntValidator(2019,2400);
-    auto duration_per_day_validator  = new QDoubleValidator(0.1, 23.59, 2);
-    //перевірити regexp
-    auto name_validator = new QRegExpValidator( QRegExp( "[А-і-я]{1,40}" )) ;
+    QRegExpValidator* duration_per_day_validator = new QRegExpValidator(QRegExp("[+]?\\d*[\\.]?\\d+"));
+    auto name_validator = new QRegExpValidator( QRegExp( "[А-і-І-я]{1,40}" )) ;
     ui->LineEditLastName->setPlaceholderText("Прізвище");
     ui->LineEditLastName->setValidator(name_validator);
     ui->LineEditFirstName->setPlaceholderText("Ім'я");
@@ -32,7 +31,6 @@ AddNewAbonement::AddNewAbonement(SwimmingPoolSeasonTicket& season_ticket, QWidge
     ui->LineEditEndMonth->setValidator(month_validator);
     ui->LineEditEndYear->setPlaceholderText("Рік завершення");
     ui->LineEditEndYear->setValidator(year_validator);
-
 }
 
 AddNewAbonement::~AddNewAbonement()
@@ -197,7 +195,7 @@ void AddNewAbonement::on_PushButtonAddAbonement_clicked()
         else
         {
             ui->LineEditFathersName->setStyleSheet(STYLESHEETDEFAULT);
-            fathers_name = ui->LineEditFathersName->text().toInt();
+            fathers_name = ui->LineEditFathersName->text().toStdString();
         }
         if(!ui->LineEditFirstName->hasAcceptableInput())
         {
@@ -207,7 +205,7 @@ void AddNewAbonement::on_PushButtonAddAbonement_clicked()
         else
         {
             ui->LineEditFirstName->setStyleSheet(STYLESHEETDEFAULT);
-            first_name = ui->LineEditFirstName->text().toInt();
+            first_name = ui->LineEditFirstName->text().toStdString();
         }
         if(!ui->LineEditLastName->hasAcceptableInput())
         {
@@ -217,7 +215,7 @@ void AddNewAbonement::on_PushButtonAddAbonement_clicked()
         else
         {
             ui->LineEditLastName->setStyleSheet(STYLESHEETDEFAULT);
-            last_name = ui->LineEditLastName->text().toInt();
+            last_name = ui->LineEditLastName->text().toStdString();
         }
         if(!ui->LineEditVisitsPerMonth->hasAcceptableInput())
         {
@@ -247,7 +245,7 @@ void AddNewAbonement::on_PushButtonAddAbonement_clicked()
         m_season_ticket = SwimmingPoolSeasonTicket(Person(first_name, last_name, fathers_name)
                                                    ,Date(end_day, end_month, end_year)
                                                    ,duration_per_day,
-                                                   visits_per_month,
+                                                   static_cast<std::size_t>(visits_per_month),
                                                    is_family,
                                                    additional_services);
         this->close();

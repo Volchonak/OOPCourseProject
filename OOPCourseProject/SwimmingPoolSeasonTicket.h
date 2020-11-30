@@ -37,6 +37,24 @@ struct Date{
     {
 
     }
+    std::string DataToStr() const noexcept
+    {
+        return std::to_string(m_day) + "."
+                + std::to_string(m_month) + "."
+                + std::to_string(m_year);
+    }
+    void set_day(const int day)
+    {
+        m_day = day;
+    }
+    void set_month(const int month)
+    {
+        m_month = month;
+    }
+    void set_year( const int year)
+    {
+        m_year = year;
+    }
 };
 
 class SwimmingPoolSeasonTicket
@@ -50,6 +68,7 @@ public:
                              ,const bool is_family
                              ,const std::set<AdditionalServices>& additional_services);
     SwimmingPoolSeasonTicket(const SwimmingPoolSeasonTicket& copy);
+    SwimmingPoolSeasonTicket(SwimmingPoolSeasonTicket&& copy);
     SwimmingPoolSeasonTicket operator>>(std::ifstream& file_input);
     SwimmingPoolSeasonTicket operator<<(std::ofstream& file_output);
     bool IsFamilyType() const noexcept;
@@ -60,18 +79,28 @@ public:
     Date get_end_date() const noexcept;
     std::size_t get_visits_per_month() const noexcept;
     std::set<AdditionalServices> get_additional_services() const noexcept;
+    SwimmingPoolSeasonTicket& operator=(const SwimmingPoolSeasonTicket& copy) noexcept;
+    SwimmingPoolSeasonTicket& operator=(SwimmingPoolSeasonTicket&& copy) noexcept;
     double get_duration_per_day() const noexcept;
     void set_person(const Person& person);
     void set_first_name(const std::string& first_name);
     void set_last_name(const std::string& last_name);
     void set_fathers_name(const std::string& fathers_name);
     void set_end_date(const Date& end_date);
+    void set_day(const int day);
+    void set_month(const int month);
+    void set_year( const int year);
     void set_duration_per_day(const double duration_per_day);
     void set_visits_per_month(const std::size_t visits_per_month);
     void set_family_type(const bool is_family);
     void set_additional_services(const std::set<AdditionalServices>& additional_services);
     void AddAdditionalService(const AdditionalServices additional_service) noexcept;
     void AddAdditionalService(const std::string& additional_service);
+    bool Empty() const noexcept;
+
+    friend std::ifstream& operator>>(std::ifstream& file_input, SwimmingPoolSeasonTicket& season_ticket);
+    friend std::ofstream& operator<<(std::ofstream& file_output, SwimmingPoolSeasonTicket& season_ticket);
+
 
 private:
     std::string DataToStr() const noexcept;
@@ -82,6 +111,7 @@ private:
     double m_duration_per_day;
     std::size_t m_visits_per_month;
     bool m_is_family;
+    bool m_empty;
     std::set<AdditionalServices> m_additional_services;
 };
 

@@ -1,5 +1,8 @@
 #include "Person.h"
+Person::Person()
+{
 
+}
 Person::Person(const std::string& first_name
        ,const std::string& last_name
        ,const std::string& fathers_name)
@@ -13,6 +16,18 @@ Person::Person(const std::string& first_name
     m_first_name = first_name;
     m_last_name = last_name;
     m_fathers_name = fathers_name;
+}
+Person::Person(const Person& copy)
+{
+    m_last_name = copy.m_last_name;
+    m_first_name = copy.m_first_name;
+    m_fathers_name = copy.m_fathers_name;
+}
+Person::Person(Person&& copy)
+{
+    m_last_name = std::move(copy.m_last_name);
+    m_first_name = std::move(copy.m_first_name);
+    m_fathers_name = std::move(copy.m_fathers_name);
 }
 std::string Person::get_first_name() const noexcept
 {

@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
-    <height>364</height>
+    <width>400</width>
+    <height>373</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>300</width>
+    <width>400</width>
     <height>400</height>
    </size>
   </property>
@@ -20,56 +20,44 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QLabel" name="LabelWelcomText">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>0</y>
-      <width>261</width>
-      <height>151</height>
+      <x>21</x>
+      <y>1</y>
+      <width>144</width>
+      <height>17</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QLabel" name="LabelWelcomText">
-       <property name="text">
-        <string>Абонемент у басейн</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QLabel" name="LabelOpenFile">
-         <property name="text">
-          <string>Введіть назву файлу</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="LineEditFileName"/>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
-         <item>
-          <widget class="QPushButton" name="PushButtonOpenFile">
-           <property name="text">
-            <string>Відкрити файл</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="PushButtonContinueWithoutFile">
-           <property name="text">
-            <string>Продовжити без файла</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-    </layout>
+    <property name="text">
+     <string>Абонемент у басейн</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="PushButtonOpenFile">
+    <property name="geometry">
+     <rect>
+      <x>23</x>
+      <y>123</y>
+      <width>113</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Відкрити файл</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="PushButtonContinueWithoutFile">
+    <property name="geometry">
+     <rect>
+      <x>142</x>
+      <y>123</y>
+      <width>175</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Продовжити без файла</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -77,8 +65,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>300</width>
-     <height>20</height>
+     <width>400</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

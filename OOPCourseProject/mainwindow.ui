@@ -6,66 +6,148 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>373</height>
+    <width>350</width>
+    <height>300</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>350</width>
+    <height>300</height>
+   </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>400</width>
-    <height>400</height>
+    <width>350</width>
+    <height>300</height>
    </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(104, 106, 105);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="LabelWelcomText">
-    <property name="geometry">
-     <rect>
-      <x>21</x>
-      <y>1</y>
-      <width>144</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Абонемент у басейн</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="PushButtonOpenFile">
-    <property name="geometry">
-     <rect>
-      <x>23</x>
-      <y>123</y>
-      <width>113</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Відкрити файл</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="PushButtonContinueWithoutFile">
-    <property name="geometry">
-     <rect>
-      <x>142</x>
-      <y>123</y>
-      <width>175</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Продовжити без файла</string>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="LabelWelcomeText">
+        <property name="styleSheet">
+         <string notr="true">
+font: 75 italic 25pt &quot;Ubuntu Condensed&quot;;
+</string>
+        </property>
+        <property name="text">
+         <string>Абонемент у басейн</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QPushButton" name="PushButtonOpenFile">
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+        </property>
+        <property name="text">
+         <string>Відкрити
+ файл</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="PushButtonContinueWithoutFile">
+        <property name="styleSheet">
+         <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+        </property>
+        <property name="text">
+         <string>Продовжити 
+без файла</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>350</width>
      <height>22</height>
     </rect>
    </property>

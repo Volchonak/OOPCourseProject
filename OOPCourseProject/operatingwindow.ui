@@ -6,169 +6,595 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>645</width>
     <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(134, 133, 133);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>30</y>
-      <width>764</width>
-      <height>342</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_4">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QTableWidget" name="MainTableWidget">
-         <property name="minimumSize">
-          <size>
-           <width>550</width>
-           <height>0</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QLabel" name="LabelEnterNumberToFind">
-             <property name="maximumSize">
-              <size>
-               <width>200</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Введіть номер абонемента, щоб 
-відобразити додаткові послуги</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
-              <widget class="QLineEdit" name="LineEditNumberToFind">
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="PushButtonFIndAbonement">
-               <property name="maximumSize">
-                <size>
-                 <width>100</width>
-                 <height>16777215</height>
-                </size>
-               </property>
-               <property name="text">
-                <string>Знайти</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="QTableWidget" name="TableWidgetAdditionalServices">
-           <property name="maximumSize">
-            <size>
-             <width>206</width>
-             <height>16777215</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <item>
-          <widget class="QPushButton" name="PushButtonAddNew">
-           <property name="text">
-            <string>Добавити новий
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_8">
+      <item>
+       <widget class="QTableWidget" name="MainTableWidget">
+        <property name="minimumSize">
+         <size>
+          <width>550</width>
+          <height>0</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout">
+              <item>
+               <widget class="QLabel" name="LabelEditNumToOperate">
+                <property name="styleSheet">
+                 <string notr="true">
+font:  10pt &quot;Ubuntu Condensed&quot;;
+</string>
+                </property>
+                <property name="text">
+                 <string>Введіть номер абонементу
+для опрацювання</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="LineEditNumToOperate">
+                <property name="styleSheet">
+                 <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="PushButtonDeleteAbonemet">
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+                </property>
+                <property name="text">
+                 <string>Видалити</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="PushButtonAddNew">
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+                </property>
+                <property name="text">
+                 <string>Добавити новий
 абонемент</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <widget class="QLabel" name="LabelEditNumToDelete">
-             <property name="text">
-              <string>Введіть номер абонементу, щоб видалити</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="LineEditNumToDelete"/>
-           </item>
-           <item>
-            <widget class="QPushButton" name="PushButtonDeleteAbonemet">
-             <property name="text">
-              <string>Видалити</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QPushButton" name="PushButtonSaveDataToFile">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>440</y>
-      <width>131</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Зберегти дані</string>
-    </property>
-   </widget>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="PushButtonSaveDataToFile">
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+                </property>
+                <property name="text">
+                 <string>Зберегти дані</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_2">
+              <item>
+               <widget class="QPushButton" name="PushButtonLessThanMonthDurationAndHasWaterpark">
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+                </property>
+                <property name="text">
+                 <string>Період дії картки менший 30 днів
+та містить додаткову послугу &quot;аквапарк&quot;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="PushButtonMaxVisitsPerMonthAndFamily">
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+                </property>
+                <property name="text">
+                 <string>Найбільша кількість відвідувань
+ в місяць та сімений</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="PushButtonFindMaxAdditionalServicesAndMinDurationPerDay">
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+                </property>
+                <property name="text">
+                 <string>Найбільше додаткових послуг
+та найменша тривалість перебування</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_5">
+              <item>
+               <widget class="QLineEdit" name="LineEditFindByName">
+                <property name="styleSheet">
+                 <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="LineEditFindByDuration">
+                <property name="styleSheet">
+                 <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="LineEditFindByVisits">
+                <property name="styleSheet">
+                 <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <item>
+               <widget class="QPushButton" name="PushButtonFindByName">
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+                </property>
+                <property name="text">
+                 <string>Пошук за ПІП</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="PushButtonFindByDuration">
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+                </property>
+                <property name="text">
+                 <string>Пошук за тривалістю</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="PushButtonfindByVisits">
+                <property name="styleSheet">
+                 <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+                </property>
+                <property name="text">
+                 <string>Пошук за к-стю відвідувань</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QLabel" name="LabelEnterNumberToFind">
+              <property name="maximumSize">
+               <size>
+                <width>250</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">
+font:  10pt &quot;Ubuntu Condensed&quot;;
+</string>
+              </property>
+              <property name="text">
+               <string>Введіть номер абонемента, щоб 
+відобразити додаткові послуги</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="LineEditNumberToFindAdditionalServices">
+              <property name="maximumSize">
+               <size>
+                <width>250</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QLineEdit{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204, 204, 204);
+	border-radius:10px;
+	padding: 5px 9px;
+	font: italic 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+}
+
+QLineEdit:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="PushButtonFIndAdditionalServices">
+              <property name="maximumSize">
+               <size>
+                <width>250</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+              </property>
+              <property name="text">
+               <string>Знайти</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="PushButtonSaveAdditionalServices">
+              <property name="maximumSize">
+               <size>
+                <width>250</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{
+	background-color:white;
+	margin-right:3%;
+	margin-top:5px;
+	border-width:1px;
+	border-style:solid;
+	border-color:rgb(204,204,204);
+	border-radius:6px;
+	padding: 5px 9px;
+	font: 12pt &quot;Times New Roman&quot;;
+	color:rgb(64, 65, 66);
+image:url(:/photo/save.png);
+image-position:left;
+}
+
+QPushButton:hover {
+		border-bottom: 3px solid rgb(204, 204, 204);
+}
+QPushButton:pressed
+{
+	background: rgb(197, 197, 197);
+}</string>
+              </property>
+              <property name="text">
+               <string>Зберегти</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QTableWidget" name="TableWidgetAdditionalServices">
+            <property name="maximumSize">
+             <size>
+              <width>250</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>645</width>
      <height>22</height>
     </rect>
    </property>

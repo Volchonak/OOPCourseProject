@@ -35,6 +35,20 @@ struct Date{
     }
     void SetDataFromStr(const std::string& data)
     {
+        std::stringstream ss(data);
+        std::string token;
+        int index = 0;
+        while(std::getline(ss, token, '.'))
+        {
+            switch(index)
+            {
+            case 0: m_day = std::stoi(token); break;
+            case 1: m_month = std::stoi(token); break;
+            case 2: m_year = std::stoi(token); break;
+            default: break;
+            }
+            ++index;
+        }
 
     }
     std::string DataToStr() const noexcept

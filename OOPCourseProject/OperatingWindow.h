@@ -17,22 +17,37 @@ class OperatingWindow : public QMainWindow
 
 public:
     explicit OperatingWindow(const bool read_from_file, QWidget *parent = nullptr);
-    void UpdateTable();
     ~OperatingWindow();
 
 
 private slots:
     void on_PushButtonAddNew_clicked();
 
-    void on_PushButtonFIndAbonement_clicked();
-
     void on_PushButtonDeleteAbonemet_clicked();
 
     void on_PushButtonSaveDataToFile_clicked();
 
+    void on_PushButtonFIndAdditionalServices_clicked();
+
+    void on_PushButtonSaveAdditionalServices_clicked();
+    
+    void on_PushButtonLessThanMonthDurationAndHasWaterpark_clicked();
+
+    void on_PushButtonMaxVisitsPerMonthAndFamily_clicked();
+
+    void on_PushButtonFindMaxAdditionalServicesAndMinDurationPerDay_clicked();
+
+    void on_PushButtonFindByName_clicked();
+
+    void on_PushButtonFindByDuration_clicked();
+
+    void on_PushButtonfindByVisits_clicked();
+
 private:
     void ReadDataFromFile();
     void SaveDataToFile() const;
+    void UpdateTable();
+    void UpdateTable(const SwimmingPoolSeasonTicket& season_ticket, const int row);
 
     Ui::OperatingWindow *ui;
     std::list<SwimmingPoolSeasonTicket> m_season_tickets;

@@ -43,6 +43,14 @@ private slots:
 
     void on_PushButtonfindByVisits_clicked();
 
+    void on_centralwidget_customContextMenuRequested();
+
+    void on_actionSave_triggered();
+
+    void on_actionUpload_table_triggered();
+
+    void on_actionInfo_triggered();
+
 private:
     void ReadDataFromFile();
     void SaveDataToFile() const;
@@ -54,6 +62,7 @@ private:
     const int DEFAULT_ROW_COUNT= 0;
     const int DEFAULT_COLUMN_COUNT = 7;
     const std::string FILE_NAME = "waterpark.dat";
+   // bool can_be_operated;
 };
 
 

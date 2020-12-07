@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>Resources/upload.png</file>
+        <file>Resources/save.png</file>
+        <file>Resources/info.png</file>
+    </qresource>
+</RCC>

@@ -9,12 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->centralwidget->setContextMenuPolicy(Qt::ActionsContextMenu);
-        QAction* copy = new QAction("Скопіювати");
-        QAction* paste = new QAction("Вставити");
-        connect(copy, SIGNAL(triggered()), this, SLOT(copy_to_clipboard()));
-        connect(paste, SIGNAL(triggered()), this, SLOT(paste_to_browser()));
-        ui->centralwidget->addActions({ copy, paste });
 }
 
 MainWindow::~MainWindow()

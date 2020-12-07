@@ -2,12 +2,14 @@
 #include "ui_operatingwindow.h"
 #include "AddNewAbonement.h"
 #include <QDate>
+#include <QMessageBox>
 
 OperatingWindow::OperatingWindow(const bool read_from_file, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::OperatingWindow)
 {
     ui->setupUi(this);
+    ui->centralwidget->setContextMenuPolicy(Qt::CustomContextMenu);
     QRegExpValidator* duration_per_day_validator = new QRegExpValidator(QRegExp("[+]?\\d*[\\.]?\\d+"));
     auto visits_validator = new QIntValidator(1,31);
     auto name_validator = new QRegExpValidator( QRegExp( "[А-і-І-я]{1,40}" )) ;
@@ -257,11 +259,28 @@ void OperatingWindow::on_PushButtonLessThanMonthDurationAndHasWaterpark_clicked(
     int row = 0;
     for(const auto& i : m_season_tickets)
     {
-        if(i.get_end_date().m_year - today.m_year == 0
-                && i.get_end_date().m_month - today.m_month == 0
-                && i.get_additional_services().find(AdditionalServices::water_park) != i.get_additional_services().end())
+        if(i.get_additional_services().find(AdditionalServices::water_park) != i.get_additional_services().end())
         {
-            UpdateTable(i, row++);
+            if(i.get_end_date().m_year - today.m_year == 0)
+            {
+                    if( i.get_end_date().m_month - today.m_month == 0)
+                {
+                    UpdateTable(i, row++);
+                }
+                    else if(i.get_end_date().m_month - today.m_month == 1
+                            && i.get_end_date().m_day - today.m_day <= 0)
+                    {
+                        UpdateTable(i, row++);
+                    }
+            }
+            else if(i.get_end_date().m_year - today.m_year == 1)
+            {
+                if(i.get_end_date().m_month == 1 && today.m_month == 12
+                          && i.get_end_date().m_day - today.m_day <= 0)
+                  {
+                      UpdateTable(i, row++);
+                  }
+            }
         }
     }
 }
@@ -359,5 +378,44 @@ void OperatingWindow::on_PushButtonfindByVisits_clicked()
     }
 }
 
+void OperatingWindow::on_centralwidget_customContextMenuRequested()
+{
+    QMenu* menu = new QMenu(ui->centralwidget);
+    menu->addAction("Зберегти", this, [this](){this->on_PushButtonSaveDataToFile_clicked();});
+    menu->addAction("Скинути фільтри", this, [this](){this->UpdateTable();});
+    menu->exec(cursor().pos());
+}
 
+void OperatingWindow::on_actionSave_triggered()
+{
+    SaveDataToFile();
+}
 
+void OperatingWindow::on_actionUpload_table_triggered()
+{
+    UpdateTable();
+}
+
+void OperatingWindow::on_actionInfo_triggered()
+{
+    QMessageBox message_box;
+    message_box.setText(R"(Варіант 8
+                        Створити клас «Абонемент в басейн» (ПІП, період дії картки, тривалість перебування в день,
+                        кількість відвідувань в місяць, сімейний (bool), масив додаткових послуг). Для класу
+                        створити: 1) конструктор за замовчуванням; 2) конструктор з параметрами; 3) конструктор
+                        копій; 4) перевизначити операції >> << для зчитування та запису у файл.
+                        Наповнити клас даними, прочитавши відповідний файл waterpark.dat.
+                        Реалізувати:
+                        1) функції пошуку за ПІП, тривалістю перебування, за вказаною кількістю відвідувань, за
+                        тривалістю перебування.
+                        2) функцію додавання даних у масив додаткових послуг (сауна, аквапарк, масаж, тощо).
+                        3) Вивести інформацію про абонемент, в якого закінчується період дії картки (менше 1
+                        місяця) та містить додаткову послугу аквапарк одночасно.
+                        4) Вивести інформацію про абонемент, в якого найбільше додаткових послуг та
+                        найменша тривалість перебування в день.
+                        5) Вивести інформацію про абонемент, що має найбільшу кількість відвідувань в місяць
+                        та є сімейним одночасно.
+                        Для демонстрації роботи програми використати засоби візуального середовища
+                        програмування.)");
+    message_box.exec();
+}

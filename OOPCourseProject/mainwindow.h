@@ -21,6 +21,7 @@ private slots:
     void on_PushButtonContinueWithoutFile_clicked();
 
 private:
+    void setToolTips();
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H

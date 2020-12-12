@@ -52,10 +52,13 @@ private slots:
     void on_actionInfo_triggered();
 
 private:
+    void CheckTableOutput() const;
+    void HasData() const;
     void ReadDataFromFile();
     void SaveDataToFile() const;
     void UpdateTable();
     void UpdateTable(const SwimmingPoolSeasonTicket& season_ticket, const int row);
+    void setToolTips();
 
     Ui::OperatingWindow *ui;
     std::list<SwimmingPoolSeasonTicket> m_season_tickets;

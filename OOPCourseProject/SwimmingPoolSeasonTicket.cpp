@@ -183,7 +183,7 @@ void SwimmingPoolSeasonTicket::AddAdditionalService(const std::string& additiona
 {
     if(additional_service.empty())
     {
-        //throw
+        throw Exception("Additional service is empty\n");
     }
     if(additional_service == "сауна")
         AddAdditionalService(AdditionalServices::sauna);
@@ -196,8 +196,8 @@ void SwimmingPoolSeasonTicket::AddAdditionalService(const std::string& additiona
     else if(additional_service == "парна")
         AddAdditionalService(AdditionalServices::steam_room);
     else
-        throw std::exception();
-    //change exception
+        throw Exception("Invalid name of additional service");
+
 }
 bool SwimmingPoolSeasonTicket::Empty() const noexcept
 {
@@ -219,45 +219,52 @@ std::ifstream& operator>>(std::ifstream& file_input, SwimmingPoolSeasonTicket& s
 {
     if(!file_input.is_open())
     {
-        throw std::runtime_error("File is not opened\n");
+        throw Exception("File is not opened\n");
     }
-    std::string line;
-    std::string data;
-    std::getline(file_input, line);
-    std::stringstream tokens(line);
-    int data_index = 0;
-    while(std::getline(tokens, data, ','))
+    try
     {
-        switch(data_index)
+        std::string line;
+        std::string data;
+        std::getline(file_input, line);
+        std::stringstream tokens(line);
+        int data_index = 0;
+        while(std::getline(tokens, data, ','))
         {
-        case 0: season_ticket.set_last_name(data); break;
-        case 1: season_ticket.set_first_name(data); break;
-        case 2: season_ticket.set_fathers_name(data); break;
-        case 3: season_ticket.set_day(std::stoi(data)); break;
-        case 4: season_ticket.set_month(std::stoi(data)); break;
-        case 5: season_ticket.set_year(std::stoi(data)); break;
-        case 6:
-        {
-            std::istringstream string_to_double(data);
-            double duration_per_day;
-            string_to_double >> duration_per_day;
-            season_ticket.set_duration_per_day(duration_per_day); break;
+            switch(data_index)
+            {
+            case 0: season_ticket.set_last_name(data); break;
+            case 1: season_ticket.set_first_name(data); break;
+            case 2: season_ticket.set_fathers_name(data); break;
+            case 3: season_ticket.set_day(std::stoi(data)); break;
+            case 4: season_ticket.set_month(std::stoi(data)); break;
+            case 5: season_ticket.set_year(std::stoi(data)); break;
+            case 6:
+            {
+                std::istringstream string_to_double(data);
+                double duration_per_day;
+                string_to_double >> duration_per_day;
+                season_ticket.set_duration_per_day(duration_per_day); break;
+            }
+            case 7: season_ticket.set_visits_per_month(static_cast<std::size_t>(std::stoi(data))); break;
+            case 8: season_ticket.set_family_type(std::stoi(data)); break;
+            default: season_ticket.AddAdditionalService(data);
+            }
+            ++data_index;
         }
-        case 7: season_ticket.set_visits_per_month(static_cast<std::size_t>(std::stoi(data))); break;
-        case 8: season_ticket.set_family_type(std::stoi(data)); break;
-        default: season_ticket.AddAdditionalService(data);
-        }
-        ++data_index;
+        if(data_index < 8)
+            throw Exception("Invalid data in file\n");
     }
-    if(data_index < 8)
-        throw std::runtime_error("Invalid data\n");
+    catch(...)
+    {
+        throw Exception("Invalid data in file\n");
+    }
     return file_input;
 }
 std::ofstream& operator<<(std::ofstream& file_output, SwimmingPoolSeasonTicket& season_ticket)
 {
     if(!file_output.is_open())
     {
-        throw std::runtime_error("File is not opened\n");
+        throw Exception("File is not opened\n");
     }
     file_output << season_ticket.DataToStr();
     return file_output;

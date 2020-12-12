@@ -9,6 +9,7 @@ OperatingWindow::OperatingWindow(const bool read_from_file, QWidget *parent) :
     ui(new Ui::OperatingWindow)
 {
     ui->setupUi(this);
+    setToolTips();
     ui->centralwidget->setContextMenuPolicy(Qt::CustomContextMenu);
     QRegExpValidator* duration_per_day_validator = new QRegExpValidator(QRegExp("[+]?\\d*[\\.]?\\d+"));
     auto visits_validator = new QIntValidator(1,31);
@@ -29,7 +30,6 @@ OperatingWindow::OperatingWindow(const bool read_from_file, QWidget *parent) :
         ReadDataFromFile();
     }
     UpdateTable();
-
     auto operations_index_validator = new QIntValidator(1, static_cast<int>(m_season_tickets.size()));
     ui->LineEditNumberToFindAdditionalServices->setValidator(operations_index_validator);
     ui->LineEditNumToOperate->setValidator(operations_index_validator);
@@ -87,6 +87,16 @@ void OperatingWindow::on_PushButtonAddNew_clicked()
 
 void OperatingWindow::on_PushButtonDeleteAbonemet_clicked()
 {
+    try
+    {
+        HasData();
+        CheckTableOutput();
+    }
+    catch(std::exception& except)
+    {
+        QMessageBox::information(this, "Warning", except.what());
+        return;
+    }
     ui->TableWidgetAdditionalServices->clear();
     int element_index;
     if(ui->LineEditNumToOperate->hasAcceptableInput())
@@ -110,23 +120,24 @@ void OperatingWindow::on_PushButtonSaveDataToFile_clicked()
 
 void OperatingWindow::ReadDataFromFile()
 {
-    std::ifstream file(FILE_NAME);
-    if(!file.is_open())
-        throw std::runtime_error("File is not opened\n");
     try
     {
+        std::ifstream file(FILE_NAME);
+        if(!file.is_open())
+            throw Exception("File is not opened\n");
         while(file.peek() != EOF)
         {
             SwimmingPoolSeasonTicket season_ticket;
             file >> season_ticket;
             m_season_tickets.push_back(season_ticket);
         }
+        file.close();
    }
-   catch(std::exception &except)
+   catch(std::exception& except)
    {
-       //do something
+       QMessageBox::critical(this, "Error", except.what());
    }
-   file.close();
+
 }
 void OperatingWindow::SaveDataToFile() const
 {
@@ -142,6 +153,16 @@ void OperatingWindow::SaveDataToFile() const
 
 void OperatingWindow::on_PushButtonFIndAdditionalServices_clicked()
 {
+    try
+    {
+        HasData();
+        CheckTableOutput();
+    }
+    catch(std::exception& except)
+    {
+        QMessageBox::information(this, "Warning", except.what());
+        return;
+    }
     ui->TableWidgetAdditionalServices->clear();
     int element_index;
     if(ui->LineEditNumberToFindAdditionalServices->hasAcceptableInput())
@@ -212,6 +233,15 @@ void OperatingWindow::on_PushButtonFIndAdditionalServices_clicked()
 
 void OperatingWindow::on_PushButtonSaveAdditionalServices_clicked()
 {
+    try
+    {
+        HasData();
+    }
+    catch(std::exception& except)
+    {
+        QMessageBox::information(this, "Warning", except.what());
+        return;
+    }
     int element_index;
     if(ui->LineEditNumberToFindAdditionalServices->hasAcceptableInput())
     {
@@ -250,10 +280,20 @@ void OperatingWindow::on_PushButtonSaveAdditionalServices_clicked()
 
 void OperatingWindow::on_PushButtonLessThanMonthDurationAndHasWaterpark_clicked()
 {
+    try
+    {
+        HasData();
+    }
+    catch(std::exception& except)
+    {
+        QMessageBox::information(this, "Warning", except.what());
+        return;
+    }
     auto current_date = QDate::currentDate().toString("dd.MM.yyyy").toStdString();
     Date today;
     today.SetDataFromStr(current_date);
     ui->MainTableWidget->clear();
+    ui->MainTableWidget->setRowCount(0);
     QStringList horizontal_headers {"Прізвище", "Ім'я", "По-батькові", "Дата завершення", "Годин/день", "Відвідувань/місяць", "Сімейний"};
     ui->MainTableWidget->setHorizontalHeaderLabels(horizontal_headers);
     int row = 0;
@@ -287,6 +327,15 @@ void OperatingWindow::on_PushButtonLessThanMonthDurationAndHasWaterpark_clicked(
 
 void OperatingWindow::on_PushButtonMaxVisitsPerMonthAndFamily_clicked()
 {
+    try
+    {
+        HasData();
+    }
+    catch(std::exception& except)
+    {
+        QMessageBox::information(this, "Warning", except.what());
+        return;
+    }
     SwimmingPoolSeasonTicket max_visits_and_family_type;
     max_visits_and_family_type.set_visits_per_month(0);
     for(const auto& i : m_season_tickets)
@@ -299,6 +348,7 @@ void OperatingWindow::on_PushButtonMaxVisitsPerMonthAndFamily_clicked()
     }
 
     ui->MainTableWidget->clear();
+    ui->MainTableWidget->setRowCount(0);
     QStringList horizontal_headers {"Прізвище", "Ім'я", "По-батькові", "Дата завершення", "Годин/день", "Відвідувань/місяць", "Сімейний"};
     ui->MainTableWidget->setHorizontalHeaderLabels(horizontal_headers);
     UpdateTable(max_visits_and_family_type, 0);
@@ -306,16 +356,25 @@ void OperatingWindow::on_PushButtonMaxVisitsPerMonthAndFamily_clicked()
 
 void OperatingWindow::on_PushButtonFindMaxAdditionalServicesAndMinDurationPerDay_clicked()
 {
+    try
+    {
+        HasData();
+    }
+    catch(std::exception& except)
+    {
+        QMessageBox::information(this, "Warning", except.what());
+        return;
+    }
     SwimmingPoolSeasonTicket max_additional_services_and_min_duration;
     int max_additional_services = 0;
     for(const auto& i : m_season_tickets)
     {
-        if(i.get_additional_services().size() > max_additional_services)
+        if(static_cast<int>(i.get_additional_services().size()) > max_additional_services)
         {
             max_additional_services_and_min_duration = i;
             max_additional_services = static_cast<int>(i.get_additional_services().size());
         }
-        else if(i.get_additional_services().size() == max_additional_services
+        else if(static_cast<int>(i.get_additional_services().size()) == max_additional_services
                 && i.get_duration_per_day() < max_additional_services_and_min_duration.get_duration_per_day())
         {
             max_additional_services_and_min_duration = i;
@@ -323,6 +382,7 @@ void OperatingWindow::on_PushButtonFindMaxAdditionalServicesAndMinDurationPerDay
     }
 
     ui->MainTableWidget->clear();
+    ui->MainTableWidget->setRowCount(0);
     QStringList horizontal_headers {"Прізвище", "Ім'я", "По-батькові", "Дата завершення", "Годин/день", "Відвідувань/місяць", "Сімейний"};
     ui->MainTableWidget->setHorizontalHeaderLabels(horizontal_headers);
     UpdateTable(max_additional_services_and_min_duration, 0);
@@ -330,8 +390,18 @@ void OperatingWindow::on_PushButtonFindMaxAdditionalServicesAndMinDurationPerDay
 
 void OperatingWindow::on_PushButtonFindByName_clicked()
 {
+    try
+    {
+        HasData();
+    }
+    catch(std::exception& except)
+    {
+        QMessageBox::information(this, "Warning", except.what());
+        return;
+    }
     std::string name_to_find = ui->LineEditFindByName->text().toStdString();
     ui->MainTableWidget->clear();
+    ui->MainTableWidget->setRowCount(0);
     QStringList horizontal_headers {"Прізвище", "Ім'я", "По-батькові", "Дата завершення", "Годин/день", "Відвідувань/місяць", "Сімейний"};
     ui->MainTableWidget->setHorizontalHeaderLabels(horizontal_headers);
     int row = 0;
@@ -348,8 +418,18 @@ void OperatingWindow::on_PushButtonFindByName_clicked()
 
 void OperatingWindow::on_PushButtonFindByDuration_clicked()
 {
+    try
+    {
+        HasData();
+    }
+    catch(std::exception& except)
+    {
+        QMessageBox::information(this, "Warning", except.what());
+        return;
+    }
     auto duration_to_find = ui->LineEditFindByDuration->text().toDouble();
     ui->MainTableWidget->clear();
+    ui->MainTableWidget->setRowCount(0);
     QStringList horizontal_headers {"Прізвище", "Ім'я", "По-батькові", "Дата завершення", "Годин/день", "Відвідувань/місяць", "Сімейний"};
     ui->MainTableWidget->setHorizontalHeaderLabels(horizontal_headers);
     int row = 0;
@@ -364,14 +444,24 @@ void OperatingWindow::on_PushButtonFindByDuration_clicked()
 
 void OperatingWindow::on_PushButtonfindByVisits_clicked()
 {
+    try
+    {
+        HasData();
+    }
+    catch(std::exception& except)
+    {
+        QMessageBox::information(this, "Warning", except.what());
+        return;
+    }
     auto visits_to_find = ui->LineEditFindByVisits->text().toInt();
     ui->MainTableWidget->clear();
+    ui->MainTableWidget->setRowCount(0);
     QStringList horizontal_headers {"Прізвище", "Ім'я", "По-батькові", "Дата завершення", "Годин/день", "Відвідувань/місяць", "Сімейний"};
     ui->MainTableWidget->setHorizontalHeaderLabels(horizontal_headers);
     int row = 0;
     for(const auto& i : m_season_tickets)
     {
-        if(i.get_visits_per_month() == visits_to_find)
+        if(static_cast<int>(i.get_visits_per_month()) == visits_to_find)
         {
             UpdateTable(i ,row++);
         }
@@ -384,6 +474,37 @@ void OperatingWindow::on_centralwidget_customContextMenuRequested()
     menu->addAction("Зберегти", this, [this](){this->on_PushButtonSaveDataToFile_clicked();});
     menu->addAction("Скинути фільтри", this, [this](){this->UpdateTable();});
     menu->exec(cursor().pos());
+}
+
+void OperatingWindow::CheckTableOutput() const
+{
+    if(ui->MainTableWidget->rowCount() != static_cast<int>(m_season_tickets.size()))
+    {
+        throw Exception("There is not all season tickets on the table\n");
+    }
+}
+void OperatingWindow::HasData() const
+{
+    if(!m_season_tickets.size())
+    {
+        throw Exception("There is no season ticket to  operate with\n");
+    }
+}
+void OperatingWindow::setToolTips()
+{
+    ui->PushButtonAddNew->setToolTip("Opens new window to add new season ticket");
+    ui->PushButtonDeleteAbonemet->setToolTip("Deletes season ticket on specified row");
+    ui->PushButtonFIndAdditionalServices->setToolTip("Shows additional services of specified season ticket");
+    ui->PushButtonFindByDuration->setToolTip("Shows all season tickets with specified duration per day");
+    ui->PushButtonFindByName->setToolTip("Shows all season tickets with specified name");
+    ui->PushButtonFindMaxAdditionalServicesAndMinDurationPerDay->setToolTip("Shows season ticket with max amount of "
+                                                                            "\nadditional services and min duration per day");
+    ui->PushButtonLessThanMonthDurationAndHasWaterpark->setToolTip("Shows season tickets with duration less than a month"
+                                                                   "\nand wich has water park additional service");
+    ui->PushButtonMaxVisitsPerMonthAndFamily->setToolTip("Shows season ticket which has max visits per month and also is family type");
+    ui->PushButtonSaveAdditionalServices->setToolTip("Saves additional services of specified season ticket");
+    ui->PushButtonSaveDataToFile->setToolTip("Saves season tickets to \"waterpark.dat\"");
+    ui->PushButtonfindByVisits->setToolTip("Show season tickets with specified amount of visits");
 }
 
 void OperatingWindow::on_actionSave_triggered()

@@ -2,7 +2,7 @@
 #define PERSON_H
 
 #include <string>
-#include "DataException.h"
+#include "Exception.h"
 
 class Person
 {

@@ -10,20 +10,20 @@ CONFIG += c++17
 
 SOURCES += \
     AddNewAbonement.cpp \
-    DataException.cpp \
     OperatingWindow.cpp \
     Person.cpp \
     SwimmingPoolSeasonTicket.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    Exception.cpp
 
 HEADERS += \
     AddNewAbonement.h \
-    DataException.h \
     OperatingWindow.h \
     Person.h \
     SwimmingPoolSeasonTicket.h \
-    mainwindow.h
+    mainwindow.h \
+    Exception.h
 
 FORMS += \
     AddNewAbonement.ui \

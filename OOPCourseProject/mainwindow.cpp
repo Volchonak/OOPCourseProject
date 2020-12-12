@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setToolTips();
 }
 
 MainWindow::~MainWindow()
@@ -29,5 +30,11 @@ void MainWindow::on_PushButtonContinueWithoutFile_clicked()
     OperatingWindow *window = new OperatingWindow(false);
     window->show();
     close();
+}
+
+void MainWindow::setToolTips()
+{
+    ui->PushButtonContinueWithoutFile->setToolTip("Continue program without opening a file");
+    ui->PushButtonOpenFile->setToolTip("Continue program and open a \"waterpark.dat\"");
 }
 

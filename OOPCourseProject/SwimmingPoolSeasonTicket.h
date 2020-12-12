@@ -1,13 +1,15 @@
 #ifndef SWIMMINGPOOLSEASONTICKET_H
 #define SWIMMINGPOOLSEASONTICKET_H
 
-#include "Person.h"
+
 #include <vector>
 #include <set>
 #include <fstream>
 #include <string>
 #include <iostream>
 #include <sstream>
+#include "Person.h"
+#include "Exception.h"
 
 enum class AdditionalServices
 {

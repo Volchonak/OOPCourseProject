@@ -76,6 +76,12 @@ font: 75 italic 25pt &quot;Ubuntu Condensed&quot;;
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QPushButton" name="PushButtonOpenFile">
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="toolTipDuration">
+         <number>-1</number>
+        </property>
         <property name="styleSheet">
          <string notr="true">QPushButton{
 	background-color:white;

@@ -10,6 +10,7 @@
 #include <sstream>
 #include "Person.h"
 #include "Exception.h"
+#include "Date.h"
 
 enum class AdditionalServices
 {
@@ -18,59 +19,6 @@ enum class AdditionalServices
     ,massage
     ,gym
     ,steam_room
-};
-
-struct Date{
-    int m_day;
-    int m_month;
-    int m_year;
-    Date(const int day, const int month, const int year)
-        : m_day(day)
-        ,m_month(month)
-        ,m_year(year)
-    {}
-    Date()
-    {
-        m_day = 0;
-        m_month = 0;
-        m_year = 0;
-    }
-    void SetDataFromStr(const std::string& data)
-    {
-        std::stringstream ss(data);
-        std::string token;
-        int index = 0;
-        while(std::getline(ss, token, '.'))
-        {
-            switch(index)
-            {
-            case 0: m_day = std::stoi(token); break;
-            case 1: m_month = std::stoi(token); break;
-            case 2: m_year = std::stoi(token); break;
-            default: break;
-            }
-            ++index;
-        }
-
-    }
-    std::string DataToStr() const noexcept
-    {
-        return std::to_string(m_day) + "."
-                + std::to_string(m_month) + "."
-                + std::to_string(m_year);
-    }
-    void set_day(const int day)
-    {
-        m_day = day;
-    }
-    void set_month(const int month)
-    {
-        m_month = month;
-    }
-    void set_year( const int year)
-    {
-        m_year = year;
-    }
 };
 
 class SwimmingPoolSeasonTicket
@@ -85,8 +33,6 @@ public:
                              ,const std::set<AdditionalServices>& additional_services);
     SwimmingPoolSeasonTicket(const SwimmingPoolSeasonTicket& copy);
     SwimmingPoolSeasonTicket(SwimmingPoolSeasonTicket&& copy);
-    SwimmingPoolSeasonTicket operator>>(std::ifstream& file_input);
-    SwimmingPoolSeasonTicket operator<<(std::ofstream& file_output);
     bool IsFamilyType() const noexcept;
     Person get_person() const noexcept;
     std::string get_first_name() const noexcept;

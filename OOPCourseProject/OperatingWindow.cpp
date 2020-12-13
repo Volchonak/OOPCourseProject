@@ -13,7 +13,7 @@ OperatingWindow::OperatingWindow(const bool read_from_file, QWidget *parent) :
     ui->centralwidget->setContextMenuPolicy(Qt::CustomContextMenu);
     QRegExpValidator* duration_per_day_validator = new QRegExpValidator(QRegExp("[+]?\\d*[\\.]?\\d+"));
     auto visits_validator = new QIntValidator(1,31);
-    auto name_validator = new QRegExpValidator( QRegExp( "[А-і-І-я]{1,40}" )) ;
+    auto name_validator = new QRegExpValidator( QRegExp( "[А-і-І-я]{1,40}[ А-і-І-я]{1,40}[ А-і-І-я]{1,40}" )) ;
     ui->LineEditFindByName->setValidator(name_validator);
     ui->LineEditFindByVisits->setValidator(visits_validator);
     ui->LineEditFindByDuration->setValidator(duration_per_day_validator);
@@ -336,12 +336,16 @@ void OperatingWindow::on_PushButtonMaxVisitsPerMonthAndFamily_clicked()
         QMessageBox::information(this, "Warning", except.what());
         return;
     }
-    SwimmingPoolSeasonTicket max_visits_and_family_type;
-    max_visits_and_family_type.set_visits_per_month(0);
-    for(const auto& i : m_season_tickets)
+    auto max_visits_and_family_type = m_season_tickets.end();
+    for(auto i = m_season_tickets.begin(); i != m_season_tickets.end(); ++i)
     {
-        if(i.get_visits_per_month() > max_visits_and_family_type.get_visits_per_month()
-                && i.IsFamilyType())
+        if(max_visits_and_family_type == m_season_tickets.end() && i->IsFamilyType())
+        {
+            max_visits_and_family_type = i;
+            continue;
+        }
+        if(i->get_visits_per_month() > max_visits_and_family_type->get_visits_per_month()
+                && i->IsFamilyType())
         {
             max_visits_and_family_type = i;
         }
@@ -351,7 +355,12 @@ void OperatingWindow::on_PushButtonMaxVisitsPerMonthAndFamily_clicked()
     ui->MainTableWidget->setRowCount(0);
     QStringList horizontal_headers {"Прізвище", "Ім'я", "По-батькові", "Дата завершення", "Годин/день", "Відвідувань/місяць", "Сімейний"};
     ui->MainTableWidget->setHorizontalHeaderLabels(horizontal_headers);
-    UpdateTable(max_visits_and_family_type, 0);
+    if(max_visits_and_family_type == m_season_tickets.end())
+    {
+        QMessageBox::information(this, "Warning", "There is no abonement with such criteries");
+        return;
+    }
+    UpdateTable(*max_visits_and_family_type, 0);
 }
 
 void OperatingWindow::on_PushButtonFindMaxAdditionalServicesAndMinDurationPerDay_clicked()
@@ -365,17 +374,17 @@ void OperatingWindow::on_PushButtonFindMaxAdditionalServicesAndMinDurationPerDay
         QMessageBox::information(this, "Warning", except.what());
         return;
     }
-    SwimmingPoolSeasonTicket max_additional_services_and_min_duration;
+    auto max_additional_services_and_min_duration = m_season_tickets.end();
     int max_additional_services = 0;
-    for(const auto& i : m_season_tickets)
+    for(auto i = m_season_tickets.begin(); i != m_season_tickets.end(); ++i)
     {
-        if(static_cast<int>(i.get_additional_services().size()) > max_additional_services)
+        if(static_cast<int>(i->get_additional_services().size()) > max_additional_services)
         {
             max_additional_services_and_min_duration = i;
-            max_additional_services = static_cast<int>(i.get_additional_services().size());
+            max_additional_services = static_cast<int>(i->get_additional_services().size());
         }
-        else if(static_cast<int>(i.get_additional_services().size()) == max_additional_services
-                && i.get_duration_per_day() < max_additional_services_and_min_duration.get_duration_per_day())
+        else if(static_cast<int>(i->get_additional_services().size()) == max_additional_services
+                && i->get_duration_per_day() < max_additional_services_and_min_duration->get_duration_per_day())
         {
             max_additional_services_and_min_duration = i;
         }
@@ -385,7 +394,7 @@ void OperatingWindow::on_PushButtonFindMaxAdditionalServicesAndMinDurationPerDay
     ui->MainTableWidget->setRowCount(0);
     QStringList horizontal_headers {"Прізвище", "Ім'я", "По-батькові", "Дата завершення", "Годин/день", "Відвідувань/місяць", "Сімейний"};
     ui->MainTableWidget->setHorizontalHeaderLabels(horizontal_headers);
-    UpdateTable(max_additional_services_and_min_duration, 0);
+    UpdateTable(*max_additional_services_and_min_duration, 0);
 }
 
 void OperatingWindow::on_PushButtonFindByName_clicked()
@@ -407,9 +416,8 @@ void OperatingWindow::on_PushButtonFindByName_clicked()
     int row = 0;
     for(const auto& i : m_season_tickets)
     {
-        if(i.get_first_name().find(name_to_find) != std::string::npos
-                || i.get_last_name().find(name_to_find) != std::string::npos
-                || i.get_fathers_name().find(name_to_find) != std::string::npos)
+        std::string name = i.get_last_name() + " " + i.get_first_name() + " " + i.get_fathers_name();
+        if(name.find(name_to_find) != std::string::npos)
         {
             UpdateTable(i ,row++);
         }

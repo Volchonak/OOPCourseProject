@@ -15,7 +15,8 @@ SOURCES += \
     SwimmingPoolSeasonTicket.cpp \
     main.cpp \
     mainwindow.cpp \
-    Exception.cpp
+    Exception.cpp \
+    Date.cpp
 
 HEADERS += \
     AddNewAbonement.h \
@@ -23,7 +24,8 @@ HEADERS += \
     Person.h \
     SwimmingPoolSeasonTicket.h \
     mainwindow.h \
-    Exception.h
+    Exception.h \
+    Date.h
 
 FORMS += \
     AddNewAbonement.ui \

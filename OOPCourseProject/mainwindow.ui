@@ -157,25 +157,6 @@ QPushButton:pressed
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu">
-    <property name="title">
-     <string>Файл</string>
-    </property>
-    <addaction name="action_newFile"/>
-    <addaction name="action_openFile"/>
-    <addaction name="action_saveFile"/>
-    <addaction name="separator"/>
-   </widget>
-   <widget class="QMenu" name="menu_2">
-    <property name="title">
-     <string>Пошук</string>
-    </property>
-    <addaction name="action_findByName"/>
-    <addaction name="action_findByLengthOfStay"/>
-    <addaction name="action_findByNumOfVisits"/>
-   </widget>
-   <addaction name="menu"/>
-   <addaction name="menu_2"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_newFile">

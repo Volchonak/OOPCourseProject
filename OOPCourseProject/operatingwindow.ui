@@ -198,7 +198,7 @@ QPushButton:pressed
 }</string>
                 </property>
                 <property name="text">
-                 <string>Період дії картки менший 30 днів
+                 <string>Період дії абонементу менший 30 днів
 та містить додаткову послугу &quot;аквапарк&quot;</string>
                 </property>
                </widget>

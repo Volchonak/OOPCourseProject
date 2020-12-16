@@ -11,13 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Додавання студента</string>
+   <string>Додавання нового абонемента</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QDialog
-{
-	background:white;
-}</string>
+   <string notr="true">background-color: rgb(134, 133, 133);</string>
   </property>
   <widget class="QPushButton" name="PushButtonAddAbonement">
    <property name="geometry">
@@ -61,7 +58,7 @@ QPushButton:pressed
     <rect>
      <x>40</x>
      <y>20</y>
-     <width>352</width>
+     <width>353</width>
      <height>321</height>
     </rect>
    </property>

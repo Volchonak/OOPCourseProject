@@ -164,6 +164,9 @@ void OperatingWindow::on_PushButtonFIndAdditionalServices_clicked()
         return;
     }
     ui->TableWidgetAdditionalServices->clear();
+    ui->TableWidgetAdditionalServices->setHorizontalHeaderLabels(QStringList("Включено"));
+    QStringList vertical_headers {"Зал", "Масаж", "Сауна", "Парна", "Аквапарк"};
+    ui->TableWidgetAdditionalServices->setVerticalHeaderLabels(vertical_headers);
     int element_index;
     if(ui->LineEditNumberToFindAdditionalServices->hasAcceptableInput())
     {
